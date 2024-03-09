@@ -36,7 +36,7 @@ class KafkaProducerConfig {
             ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG to true,
             ProducerConfig.MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION to 5,
 
-            ProducerConfig.ACKS_CONFIG to 1,
+            ProducerConfig.ACKS_CONFIG to "all",
         )
         return DefaultKafkaProducerFactory(config)
     }
