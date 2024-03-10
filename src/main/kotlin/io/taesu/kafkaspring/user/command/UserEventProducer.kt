@@ -56,15 +56,6 @@ class UserEventProducer(private val kafkaTemplate: KafkaTemplate<String, Any>) {
             }
     }
 
-    fun sendWithSuspend(
-        userCreatedEvent: UserCreatedEvent,
-        key: String,
-        completeCallback: (t: SendResult<String, Any>, u: Throwable) -> Unit,
-    ) {
-        kafkaTemplate
-
-    }
-
     companion object {
         const val TOPIC_USER_CREATED = "user-created"
     }

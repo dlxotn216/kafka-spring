@@ -33,10 +33,16 @@ class KafkaProducerConfig {
             ProducerConfig.LINGER_MS_CONFIG to 0,
             ProducerConfig.REQUEST_TIMEOUT_MS_CONFIG to 30000,
             ProducerConfig.RETRY_BACKOFF_MS_CONFIG to 1000,
-            ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG to true,
-            ProducerConfig.MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION to 5,
 
+            // exactly once 설정
+            ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG to true,
             ProducerConfig.ACKS_CONFIG to "all",
+            ProducerConfig.MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION to 1,
+
+            JsonSerializer.TYPE_MAPPINGS to """
+                user-created:io.taesu.kafkaspring.user.command.UserCreatedEvent,
+                team-created:io.taesu.kafkaspring.team.command.TeamCreatedEvent
+            """.trimIndent(),
         )
         return DefaultKafkaProducerFactory(config)
     }
